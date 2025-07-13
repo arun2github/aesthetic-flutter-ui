@@ -75,192 +75,195 @@ class _PhotoEditorScreenState extends State<PhotoEditorScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        'Photo Editor',
-                        style: GoogleFonts.poppins(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'Photo Editor',
+                          style: GoogleFonts.poppins(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Save photo
-                      },
-                      icon: const Icon(Icons.save, color: Colors.white),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Share photo
-                      },
-                      icon: const Icon(Icons.share, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Photo Display Area
-              Expanded(
-                flex: 3,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
+                      IconButton(
+                        onPressed: () {
+                          // Save photo
+                        },
+                        icon: const Icon(Icons.save, color: Colors.white),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Share photo
+                        },
+                        icon: const Icon(Icons.share, color: Colors.white),
                       ),
                     ],
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Stack(
-                      children: [
-                        // Background Image Placeholder
-                        Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.blue.withOpacity(0.8),
-                                Colors.purple.withOpacity(0.8),
-                                Colors.pink.withOpacity(0.8),
-                              ],
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.photo_camera,
-                            size: 80,
-                            color: Colors.white54,
-                          ),
-                        ),
+                ),
 
-                        // Filter Overlay
-                        if (_selectedFilter != 'None')
-                          Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            color: _getFilterColor(
-                              _selectedFilter,
-                            ).withOpacity(0.3),
-                          ),
-
-                        // Adjustment Overlays
-                        Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(_brightness * 0.1),
-                          ),
-                        ),
-
-                        // Center Text
-                        const Center(
-                          child: Text(
-                            'Tap to select photo',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                // Photo Display Area
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
                         ),
                       ],
                     ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Stack(
+                        children: [
+                          // Background Image Placeholder
+                          Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Colors.blue.withOpacity(0.8),
+                                  Colors.purple.withOpacity(0.8),
+                                  Colors.pink.withOpacity(0.8),
+                                ],
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.photo_camera,
+                              size: 80,
+                              color: Colors.white54,
+                            ),
+                          ),
+
+                          // Filter Overlay
+                          if (_selectedFilter != 'None')
+                            Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: _getFilterColor(
+                                _selectedFilter,
+                              ).withOpacity(0.3),
+                            ),
+
+                          // Adjustment Overlays
+                          Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(_brightness * 0.1),
+                            ),
+                          ),
+
+                          // Center Text
+                          const Center(
+                            child: Text(
+                              'Tap to select photo',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Tools Bar
-              Container(
-                height: 80,
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _tools.length,
-                  itemBuilder: (context, index) {
-                    final tool = _tools[index];
-                    final isSelected = _selectedTool == index;
-                    return Container(
-                      margin: const EdgeInsets.only(right: 16),
-                      child: GestureDetector(
-                        onTap: () => setState(() => _selectedTool = index),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? tool['color'].withOpacity(0.3)
-                                    : Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(
+                // Tools Bar
+                Container(
+                  height: 80,
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _tools.length,
+                    itemBuilder: (context, index) {
+                      final tool = _tools[index];
+                      final isSelected = _selectedTool == index;
+                      return Container(
+                        margin: const EdgeInsets.only(right: 16),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _selectedTool = index),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? tool['color'].withOpacity(0.3)
+                                      : Colors.white.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color: isSelected
+                                        ? tool['color']
+                                        : Colors.white.withOpacity(0.2),
+                                    width: isSelected ? 2 : 1,
+                                  ),
+                                ),
+                                child: Icon(
+                                  tool['icon'],
                                   color: isSelected
                                       ? tool['color']
-                                      : Colors.white.withOpacity(0.2),
-                                  width: isSelected ? 2 : 1,
+                                      : Colors.white,
+                                  size: 24,
                                 ),
                               ),
-                              child: Icon(
-                                tool['icon'],
-                                color: isSelected
-                                    ? tool['color']
-                                    : Colors.white,
-                                size: 24,
+                              const SizedBox(height: 8),
+                              Text(
+                                tool['name'],
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                  color: isSelected
+                                      ? tool['color']
+                                      : Colors.white70,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              tool['name'],
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: isSelected
-                                    ? FontWeight.w600
-                                    : FontWeight.w400,
-                                color: isSelected
-                                    ? tool['color']
-                                    : Colors.white70,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Tool Options
-              if (_selectedTool == 0) _buildFilterOptions(),
-              if (_selectedTool == 1) _buildAdjustmentOptions(),
+                // Tool Options
+                if (_selectedTool == 0) _buildFilterOptions(),
+                if (_selectedTool == 1) _buildAdjustmentOptions(),
 
-              const SizedBox(height: 24),
-            ],
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),

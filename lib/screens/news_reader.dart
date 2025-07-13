@@ -144,137 +144,140 @@ class _NewsReaderScreenState extends State<NewsReaderScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'News Reader',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Stay informed with the latest',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Open bookmarks
-                      },
-                      icon: const Icon(
-                        Icons.bookmark_border,
-                        color: Colors.white,
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'News Reader',
+                              style: GoogleFonts.poppins(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'Stay informed with the latest',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                  ),
-                  child: TextField(
-                    onChanged: (value) => setState(() => _searchQuery = value),
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Search articles...',
-                      hintStyle: TextStyle(color: Colors.white54),
-                      border: InputBorder.none,
-                      icon: Icon(Icons.search, color: Colors.white54),
-                    ),
+                      IconButton(
+                        onPressed: () {
+                          // Open bookmarks
+                        },
+                        icon: const Icon(
+                          Icons.bookmark_border,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                // Search Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                    ),
+                    child: TextField(
+                      onChanged: (value) => setState(() => _searchQuery = value),
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        hintText: 'Search articles...',
+                        hintStyle: TextStyle(color: Colors.white54),
+                        border: InputBorder.none,
+                        icon: Icon(Icons.search, color: Colors.white54),
+                      ),
+                    ),
+                  ),
+                ),
 
-              // Categories
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index) {
-                    final isSelected = _selectedCategory == index;
-                    return Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      child: GestureDetector(
-                        onTap: () => setState(() => _selectedCategory = index),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? Colors.blue.withOpacity(0.3)
-                                : Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
+                const SizedBox(height: 24),
+
+                // Categories
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _categories.length,
+                    itemBuilder: (context, index) {
+                      final isSelected = _selectedCategory == index;
+                      return Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _selectedCategory = index),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
                               color: isSelected
-                                  ? Colors.blue.withOpacity(0.5)
-                                  : Colors.white.withOpacity(0.2),
+                                  ? Colors.blue.withOpacity(0.3)
+                                  : Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.blue.withOpacity(0.5)
+                                    : Colors.white.withOpacity(0.2),
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            _categories[index],
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
-                              color: isSelected ? Colors.white : Colors.white70,
+                            child: Text(
+                              _categories[index],
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: isSelected
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                                color: isSelected ? Colors.white : Colors.white70,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Articles List
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _filteredArticles.length,
-                  itemBuilder: (context, index) {
-                    return _buildArticleCard(_filteredArticles[index], index);
-                  },
+                // Articles List
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _filteredArticles.length,
+                    itemBuilder: (context, index) {
+                      return _buildArticleCard(_filteredArticles[index], index);
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

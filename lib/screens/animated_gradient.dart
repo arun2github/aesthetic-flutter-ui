@@ -79,58 +79,63 @@ class _AnimatedGradientScreenState extends State<AnimatedGradientScreen>
               ),
             ),
             child: SafeArea(
-              child: Column(
-                children: [
-                  // App bar
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.white.withOpacity(0.2),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                ), // 12px top margin for content
+                child: Column(
+                  children: [
+                    // App bar
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.arrow_back_ios,
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            'Animated Gradient',
+                            style: GoogleFonts.poppins(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              size: 20,
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Text(
-                          'Animated Gradient',
-                          style: GoogleFonts.poppins(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
 
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(16),
-                      children: [
-                        _buildGradientCard(
-                          title: 'Premium Features',
-                          subtitle: 'Unlock amazing possibilities',
-                          icon: Icons.star,
-                          delay: 0,
-                        ),
-                        _buildPulsingCard(),
-                        _buildMorphingCard(),
-                        _buildWaveCard(),
-                      ],
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.all(16),
+                        children: [
+                          _buildGradientCard(
+                            title: 'Premium Features',
+                            subtitle: 'Unlock amazing possibilities',
+                            icon: Icons.star,
+                            delay: 0,
+                          ),
+                          _buildPulsingCard(),
+                          _buildMorphingCard(),
+                          _buildWaveCard(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

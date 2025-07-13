@@ -131,250 +131,253 @@ class _MeditationAppScreenState extends State<MeditationAppScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Meditation',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Find your inner peace',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.green.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.local_fire_department,
-                            color: Colors.orange,
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '$_currentStreak days',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Breathing Exercise
-              if (_isBreathing) _buildBreathingExercise(),
-
-              // Stats Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
                   child: Row(
                     children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                      const SizedBox(width: 16),
                       Expanded(
-                        child: _buildStatItem(
-                          'Total Minutes',
-                          '${(_totalMinutes / 60).round()}h ${_totalMinutes % 60}m',
-                          Icons.timer,
-                          Colors.blue,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Meditation',
+                              style: GoogleFonts.poppins(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'Find your inner peace',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(
-                        width: 1,
-                        height: 50,
-                        color: Colors.white.withOpacity(0.2),
-                      ),
-                      Expanded(
-                        child: _buildStatItem(
-                          'This Week',
-                          '45 min',
-                          Icons.calendar_today,
-                          Colors.green,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
                         ),
-                      ),
-                      Container(
-                        width: 1,
-                        height: 50,
-                        color: Colors.white.withOpacity(0.2),
-                      ),
-                      Expanded(
-                        child: _buildStatItem(
-                          'Sessions',
-                          '8',
-                          Icons.self_improvement,
-                          Colors.purple,
+                        decoration: BoxDecoration(
+                          color: Colors.green.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.green.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.local_fire_department,
+                              color: Colors.orange,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              '$_currentStreak days',
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                // Breathing Exercise
+                if (_isBreathing) _buildBreathingExercise(),
 
-              // Quick Start Button
-              if (!_isBreathing)
+                // Stats Section
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: GestureDetector(
-                    onTap: _startBreathing,
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.blue.withOpacity(0.8),
-                            Colors.purple.withOpacity(0.8),
-                          ],
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _buildStatItem(
+                            'Total Minutes',
+                            '${(_totalMinutes / 60).round()}h ${_totalMinutes % 60}m',
+                            Icons.timer,
+                            Colors.blue,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.blue.withOpacity(0.3),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+                        Container(
+                          width: 1,
+                          height: 50,
+                          color: Colors.white.withOpacity(0.2),
+                        ),
+                        Expanded(
+                          child: _buildStatItem(
+                            'This Week',
+                            '45 min',
+                            Icons.calendar_today,
+                            Colors.green,
                           ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Icon(
-                              Icons.air,
-                              color: Colors.white,
-                              size: 24,
-                            ),
+                        ),
+                        Container(
+                          width: 1,
+                          height: 50,
+                          color: Colors.white.withOpacity(0.2),
+                        ),
+                        Expanded(
+                          child: _buildStatItem(
+                            'Sessions',
+                            '8',
+                            Icons.self_improvement,
+                            Colors.purple,
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Quick Breathing',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(
-                                  'Take a moment to breathe',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    color: Colors.white70,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 24),
 
-              // Sessions Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Text(
-                      'Guided Sessions',
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'View All',
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: Colors.blue,
+                // Quick Start Button
+                if (!_isBreathing)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: GestureDetector(
+                      onTap: _startBreathing,
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.blue.withOpacity(0.8),
+                              Colors.purple.withOpacity(0.8),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.blue.withOpacity(0.3),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: const Icon(
+                                Icons.air,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Quick Breathing',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Take a moment to breathe',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
+
+                const SizedBox(height: 24),
+
+                // Sessions Section
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Guided Sessions',
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'View All',
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              // Sessions List
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _sessions.length,
-                  itemBuilder: (context, index) {
-                    return _buildSessionCard(_sessions[index], index);
-                  },
+                // Sessions List
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _sessions.length,
+                    itemBuilder: (context, index) {
+                      return _buildSessionCard(_sessions[index], index);
+                    },
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
-            ],
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),

@@ -322,29 +322,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-
-
-              // Grid of UI trends
-              Expanded(
-                child: GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.85,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                // Grid of UI trends
+                Expanded(
+                  child: GridView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.85,
+                        ),
+                    itemCount: uiTrends.length,
+                    itemBuilder: (context, index) {
+                      final trend = uiTrends[index];
+                      return _buildTrendCard(trend, index);
+                    },
                   ),
-                  itemCount: uiTrends.length,
-                  itemBuilder: (context, index) {
-                    final trend = uiTrends[index];
-                    return _buildTrendCard(trend, index);
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -360,100 +362,120 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           child: Opacity(
             opacity: _fadeAnimation.value,
             child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        trend['screen'],
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                          return FadeTransition(
-                            opacity: animation,
-                            child: child,
-                          );
-                        },
-                    transitionDuration: const Duration(milliseconds: 300),
-                  ),
-                );
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      trend['color'].withOpacity(0.8),
-                      trend['color'].withOpacity(0.4),
-                    ],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: trend['color'].withOpacity(0.3),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.2),
-                          width: 1,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(trend['icon'], size: 48, color: Colors.white)
-                                .animate(delay: (index * 100).ms)
-                                .scale(
-                                  begin: const Offset(0, 0),
-                                  end: const Offset(1, 1),
-                                )
-                                .then()
-                                .shake(hz: 4),
-                            const SizedBox(height: 16),
-                            Text(
-                              trend['title'],
-                              style: GoogleFonts.poppins(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              trend['description'],
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: Colors.white70,
-                              ),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              onTap: () => _navigateToScreen(trend['screen']),
+              child: _buildCardContainer(trend, index),
             ),
           ),
         );
       },
+    );
+  }
+
+  // Optimized navigation method
+  void _navigateToScreen(Widget screen) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => screen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      ),
+    );
+  }
+
+  // Optimized card container widget
+  Widget _buildCardContainer(Map<String, dynamic> trend, int index) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            trend['color'].withOpacity(0.8),
+            trend['color'].withOpacity(0.4),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: trend['color'].withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.2),
+                width: 1,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: _buildCardContent(trend, index),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Optimized card content widget with 12px margin above title
+  Widget _buildCardContent(Map<String, dynamic> trend, int index) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildAnimatedIcon(trend, index),
+        const SizedBox(height: 16),
+        _buildTitleWithMargin(trend['title']),
+        const SizedBox(height: 8),
+        _buildDescription(trend['description']),
+      ],
+    );
+  }
+
+  // Optimized animated icon widget
+  Widget _buildAnimatedIcon(Map<String, dynamic> trend, int index) {
+    return Icon(trend['icon'], size: 48, color: Colors.white)
+        .animate(delay: (index * 100).ms)
+        .scale(begin: const Offset(0, 0), end: const Offset(1, 1))
+        .then()
+        .shake(hz: 4);
+  }
+
+  // Optimized title widget with 12px margin above
+  Widget _buildTitleWithMargin(String title) {
+    return Container(
+      margin: const EdgeInsets.only(top: 12), // 12px margin above title
+      child: Text(
+        title,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  // Optimized description widget
+  Widget _buildDescription(String description) {
+    return Text(
+      description,
+      style: GoogleFonts.poppins(fontSize: 12, color: Colors.white70),
+      textAlign: TextAlign.center,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

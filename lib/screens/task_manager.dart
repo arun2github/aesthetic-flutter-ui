@@ -124,200 +124,203 @@ class _TaskManagerScreenState extends State<TaskManagerScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Task Manager',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Project Dashboard',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.green.withOpacity(0.3),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 8,
-                            height: 8,
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Online',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: Colors.green,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Stats Cards
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        'Total Tasks',
-                        '${_tasks.length}',
-                        Icons.task_alt,
-                        Colors.blue,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'In Progress',
-                        '${_tasks.where((task) => task['status'] == 'in-progress').length}',
-                        Icons.pending,
-                        Colors.orange,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'Completed',
-                        '${_tasks.where((task) => task['status'] == 'done').length}',
-                        Icons.check_circle,
-                        Colors.green,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Tab Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
                   child: Row(
-                    children: ['Board', 'List', 'Calendar', 'Analytics']
-                        .asMap()
-                        .entries
-                        .map((entry) {
-                          final index = entry.key;
-                          final title = entry.value;
-                          final isSelected = _selectedTab == index;
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () => setState(() => _selectedTab = index),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? Colors.white.withOpacity(0.2)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  title,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: isSelected
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.white70,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Task Manager',
+                              style: GoogleFonts.poppins(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
-                          );
-                        })
-                        .toList(),
+                            Text(
+                              'Project Dashboard',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.green.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: const BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Online',
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
-
-              // Kanban Board
-              Expanded(
-                child: Padding(
+                // Stats Cards
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(
                     children: [
                       Expanded(
-                        child: _buildColumn('To Do', 'todo', Colors.grey),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _buildColumn(
-                          'In Progress',
-                          'in-progress',
+                        child: _buildStatCard(
+                          'Total Tasks',
+                          '${_tasks.length}',
+                          Icons.task_alt,
                           Colors.blue,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: _buildColumn('Review', 'review', Colors.purple),
+                        child: _buildStatCard(
+                          'In Progress',
+                          '${_tasks.where((task) => task['status'] == 'in-progress').length}',
+                          Icons.pending,
+                          Colors.orange,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
-                        child: _buildColumn('Done', 'done', Colors.green),
+                        child: _buildStatCard(
+                          'Completed',
+                          '${_tasks.where((task) => task['status'] == 'done').length}',
+                          Icons.check_circle,
+                          Colors.green,
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 24),
+
+                // Tab Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                    ),
+                    child: Row(
+                      children: ['Board', 'List', 'Calendar', 'Analytics']
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                            final index = entry.key;
+                            final title = entry.value;
+                            final isSelected = _selectedTab == index;
+                            return Expanded(
+                              child: GestureDetector(
+                                onTap: () => setState(() => _selectedTab = index),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? Colors.white.withOpacity(0.2)
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Text(
+                                    title,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      fontWeight: isSelected
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors.white70,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            );
+                          })
+                          .toList(),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Kanban Board
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _buildColumn('To Do', 'todo', Colors.grey),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildColumn(
+                            'In Progress',
+                            'in-progress',
+                            Colors.blue,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildColumn('Review', 'review', Colors.purple),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildColumn('Done', 'done', Colors.green),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -108,77 +108,82 @@ class _GlassmorphismCardScreenState extends State<GlassmorphismCardScreen>
 
             // Main content
             SafeArea(
-              child: Column(
-                children: [
-                  // App bar
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Colors.white.withOpacity(0.2),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                ), // 12px top margin for content
+                child: Column(
+                  children: [
+                    // App bar
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white.withOpacity(0.2),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.arrow_back_ios,
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            'Glassmorphism Cards',
+                            style: GoogleFonts.poppins(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              size: 20,
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Text(
-                          'Glassmorphism Cards',
-                          style: GoogleFonts.poppins(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
 
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(16),
-                      children: [
-                        _buildGlassmorphismCard(
-                          title: 'Premium Card',
-                          subtitle: 'Exclusive benefits',
-                          icon: Icons.diamond,
-                          color: Colors.purple,
-                          delay: 0,
-                        ),
-                        _buildGlassmorphismCard(
-                          title: 'Travel Card',
-                          subtitle: 'Explore the world',
-                          icon: Icons.flight,
-                          color: Colors.blue,
-                          delay: 200,
-                        ),
-                        _buildGlassmorphismCard(
-                          title: 'Music Card',
-                          subtitle: 'Unlimited streaming',
-                          icon: Icons.music_note,
-                          color: Colors.pink,
-                          delay: 400,
-                        ),
-                        _buildGlassmorphismCard(
-                          title: 'Fitness Card',
-                          subtitle: 'Stay healthy',
-                          icon: Icons.fitness_center,
-                          color: Colors.green,
-                          delay: 600,
-                        ),
-                      ],
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.all(16),
+                        children: [
+                          _buildGlassmorphismCard(
+                            title: 'Premium Card',
+                            subtitle: 'Exclusive benefits',
+                            icon: Icons.diamond,
+                            color: Colors.purple,
+                            delay: 0,
+                          ),
+                          _buildGlassmorphismCard(
+                            title: 'Travel Card',
+                            subtitle: 'Explore the world',
+                            icon: Icons.flight,
+                            color: Colors.blue,
+                            delay: 200,
+                          ),
+                          _buildGlassmorphismCard(
+                            title: 'Music Card',
+                            subtitle: 'Unlimited streaming',
+                            icon: Icons.music_note,
+                            color: Colors.pink,
+                            delay: 400,
+                          ),
+                          _buildGlassmorphismCard(
+                            title: 'Fitness Card',
+                            subtitle: 'Stay healthy',
+                            icon: Icons.fitness_center,
+                            color: Colors.green,
+                            delay: 600,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

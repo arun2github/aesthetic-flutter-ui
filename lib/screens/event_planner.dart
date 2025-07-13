@@ -127,150 +127,153 @@ class _EventPlannerScreenState extends State<EventPlannerScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Event Planner',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Organize your life',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Add new event
-                      },
-                      icon: const Icon(Icons.add, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Quick Stats
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: _buildStatCard(
-                        'Upcoming',
-                        '${_events.where((e) => e['date'].isAfter(DateTime.now())).length}',
-                        Icons.event,
-                        Colors.blue,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'This Week',
-                        '3',
-                        Icons.calendar_today,
-                        Colors.green,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _buildStatCard(
-                        'Pending',
-                        '1',
-                        Icons.pending,
-                        Colors.orange,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Tab Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
                   child: Row(
-                    children: ['Timeline', 'Calendar', 'Upcoming']
-                        .asMap()
-                        .entries
-                        .map((entry) {
-                          final index = entry.key;
-                          final title = entry.value;
-                          final isSelected = _selectedTab == index;
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () => setState(() => _selectedTab = index),
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? Colors.white.withOpacity(0.2)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  title,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: isSelected
-                                        ? FontWeight.w600
-                                        : FontWeight.w400,
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.white70,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Event Planner',
+                              style: GoogleFonts.poppins(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
                             ),
-                          );
-                        })
-                        .toList(),
+                            Text(
+                              'Organize your life',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Add new event
+                        },
+                        icon: const Icon(Icons.add, color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                // Quick Stats
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildStatCard(
+                          'Upcoming',
+                          '${_events.where((e) => e['date'].isAfter(DateTime.now())).length}',
+                          Icons.event,
+                          Colors.blue,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildStatCard(
+                          'This Week',
+                          '3',
+                          Icons.calendar_today,
+                          Colors.green,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildStatCard(
+                          'Pending',
+                          '1',
+                          Icons.pending,
+                          Colors.orange,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
 
-              // Content based on selected tab
-              Expanded(
-                child: _selectedTab == 0
-                    ? _buildTimeline()
-                    : _selectedTab == 1
-                    ? _buildCalendar()
-                    : _buildUpcoming(),
-              ),
-            ],
+                const SizedBox(height: 24),
+
+                // Tab Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                    ),
+                    child: Row(
+                      children: ['Timeline', 'Calendar', 'Upcoming']
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                            final index = entry.key;
+                            final title = entry.value;
+                            final isSelected = _selectedTab == index;
+                            return Expanded(
+                              child: GestureDetector(
+                                onTap: () => setState(() => _selectedTab = index),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? Colors.white.withOpacity(0.2)
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Text(
+                                    title,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      fontWeight: isSelected
+                                          ? FontWeight.w600
+                                          : FontWeight.w400,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors.white70,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                            );
+                          })
+                          .toList(),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Content based on selected tab
+                Expanded(
+                  child: _selectedTab == 0
+                      ? _buildTimeline()
+                      : _selectedTab == 1
+                      ? _buildCalendar()
+                      : _buildUpcoming(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

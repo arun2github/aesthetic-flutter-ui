@@ -17,49 +17,54 @@ class _NeumorphicUIScreenState extends State<NeumorphicUIScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFE0E5EC),
       body: SafeArea(
-        child: Column(
-          children: [
-            // App bar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: _buildNeumorphicButton(
-                      child: const Icon(Icons.arrow_back_ios, size: 20),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 12,
+          ), // 12px top margin for content
+          child: Column(
+            children: [
+              // App bar
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: _buildNeumorphicButton(
+                        child: const Icon(Icons.arrow_back_ios, size: 20),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    'Neumorphic UI',
-                    style: GoogleFonts.poppins(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF2D3748),
+                    const SizedBox(width: 16),
+                    Text(
+                      'Neumorphic UI',
+                      style: GoogleFonts.poppins(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF2D3748),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  _buildNeumorphicCard(
-                    title: 'Music Player',
-                    subtitle: 'Now Playing',
-                    icon: Icons.music_note,
-                    delay: 0,
-                  ),
-                  _buildNeumorphicSlider(),
-                  _buildNeumorphicButtons(),
-                  _buildNeumorphicSwitch(),
-                ],
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    _buildNeumorphicCard(
+                      title: 'Music Player',
+                      subtitle: 'Now Playing',
+                      icon: Icons.music_note,
+                      delay: 0,
+                    ),
+                    _buildNeumorphicSlider(),
+                    _buildNeumorphicButtons(),
+                    _buildNeumorphicSwitch(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -201,191 +201,194 @@ class _RecipeFinderScreenState extends State<RecipeFinderScreen>
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Recipe Finder',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            'Discover delicious recipes',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ],
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Column(
+              children: [
+                // Header
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // Open favorites
-                      },
-                      icon: const Icon(Icons.favorite, color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                  ),
-                  child: TextField(
-                    onChanged: (value) => setState(() => _searchQuery = value),
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Search recipes...',
-                      hintStyle: TextStyle(color: Colors.white54),
-                      border: InputBorder.none,
-                      icon: Icon(Icons.search, color: Colors.white54),
-                    ),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Categories
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _categories.length,
-                  itemBuilder: (context, index) {
-                    final isSelected = _selectedCategory == index;
-                    return Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      child: GestureDetector(
-                        onTap: () => setState(() => _selectedCategory = index),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? Colors.orange.withOpacity(0.3)
-                                : Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                              color: isSelected
-                                  ? Colors.orange.withOpacity(0.5)
-                                  : Colors.white.withOpacity(0.2),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Recipe Finder',
+                              style: GoogleFonts.poppins(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            _categories[index],
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
-                              color: isSelected ? Colors.white : Colors.white70,
+                            Text(
+                              'Discover delicious recipes',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.white70,
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Dietary Filters
-              SizedBox(
-                height: 40,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _dietaryOptions.length,
-                  itemBuilder: (context, index) {
-                    final dietary = _dietaryOptions[index];
-                    final isSelected = _selectedDietary.contains(dietary);
-                    return Container(
-                      margin: const EdgeInsets.only(right: 8),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (isSelected) {
-                              _selectedDietary.remove(dietary);
-                            } else {
-                              _selectedDietary.add(dietary);
-                            }
-                          });
+                      IconButton(
+                        onPressed: () {
+                          // Open favorites
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? Colors.green.withOpacity(0.3)
-                                : Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: isSelected
-                                  ? Colors.green.withOpacity(0.5)
-                                  : Colors.white.withOpacity(0.2),
+                        icon: const Icon(Icons.favorite, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Search Bar
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: Colors.white.withOpacity(0.2)),
+                    ),
+                    child: TextField(
+                      onChanged: (value) => setState(() => _searchQuery = value),
+                      style: const TextStyle(color: Colors.white),
+                      decoration: const InputDecoration(
+                        hintText: 'Search recipes...',
+                        hintStyle: TextStyle(color: Colors.white54),
+                        border: InputBorder.none,
+                        icon: Icon(Icons.search, color: Colors.white54),
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Categories
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _categories.length,
+                    itemBuilder: (context, index) {
+                      final isSelected = _selectedCategory == index;
+                      return Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        child: GestureDetector(
+                          onTap: () => setState(() => _selectedCategory = index),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
                             ),
-                          ),
-                          child: Text(
-                            dietary,
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              fontWeight: isSelected
-                                  ? FontWeight.w600
-                                  : FontWeight.w400,
-                              color: isSelected ? Colors.white : Colors.white70,
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colors.orange.withOpacity(0.3)
+                                  : Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.orange.withOpacity(0.5)
+                                    : Colors.white.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Text(
+                              _categories[index],
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: isSelected
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                                color: isSelected ? Colors.white : Colors.white70,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                const SizedBox(height: 16),
 
-              // Recipes List
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: _filteredRecipes.length,
-                  itemBuilder: (context, index) {
-                    return _buildRecipeCard(_filteredRecipes[index], index);
-                  },
+                // Dietary Filters
+                SizedBox(
+                  height: 40,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _dietaryOptions.length,
+                    itemBuilder: (context, index) {
+                      final dietary = _dietaryOptions[index];
+                      final isSelected = _selectedDietary.contains(dietary);
+                      return Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (isSelected) {
+                                _selectedDietary.remove(dietary);
+                              } else {
+                                _selectedDietary.add(dietary);
+                              }
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colors.green.withOpacity(0.3)
+                                  : Colors.white.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.green.withOpacity(0.5)
+                                    : Colors.white.withOpacity(0.2),
+                              ),
+                            ),
+                            child: Text(
+                              dietary,
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: isSelected
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                                color: isSelected ? Colors.white : Colors.white70,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 24),
+
+                // Recipes List
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _filteredRecipes.length,
+                    itemBuilder: (context, index) {
+                      return _buildRecipeCard(_filteredRecipes[index], index);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
