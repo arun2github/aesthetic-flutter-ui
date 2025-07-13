@@ -1,1 +1,0 @@
-@rpath/instagram_ui_showcase.debug.dylib
