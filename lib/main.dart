@@ -41,7 +41,7 @@ class InstagramUIShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Instagram UI Showcase',
+      // title: 'Instagram UI Showcase',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -324,39 +324,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: SafeArea(
           child: Column(
             children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: SlideTransition(
-                    position: _slideAnimation,
-                    child: Column(
-                      children: [
-                        Text(
-                              'Instagram UI Showcase',
-                              style: GoogleFonts.poppins(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            )
-                            .animate()
-                            .fadeIn(duration: 600.ms)
-                            .slideY(begin: -0.3),
-                        const SizedBox(height: 8),
-                        Text(
-                          '10 Trending Flutter UI Designs',
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            color: Colors.white70,
-                          ),
-                        ).animate().fadeIn(delay: 200.ms, duration: 600.ms),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+
 
               // Grid of UI trends
               Expanded(
